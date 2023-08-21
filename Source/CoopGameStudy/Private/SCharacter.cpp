@@ -9,7 +9,7 @@
 // Sets default values
 ASCharacter::ASCharacter()
 {
- 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	SpringArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("SpringArmComp"));
@@ -26,13 +26,14 @@ ASCharacter::ASCharacter()
 void ASCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
+
 
 void ASCharacter::MoveForward(float Value)
 {
-	return AddMovementInput(GetActorForwardVector() * Value);
+	AddMovementInput(GetActorForwardVector() * Value);
 }
+
 
 void ASCharacter::MoveRight(float Value)
 {
@@ -48,7 +49,7 @@ void ASCharacter::BeginCrouch()
 
 void ASCharacter::EndCrouch()
 {
-	UnCrouch();	
+	UnCrouch();
 }
 
 
@@ -56,7 +57,6 @@ void ASCharacter::EndCrouch()
 void ASCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
@@ -76,3 +76,13 @@ void ASCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ASCharacter::Jump);
 }
 
+
+FVector ASCharacter::GetPawnViewLocation() const
+{
+	if (CameraComp)
+	{
+		return CameraComp->GetComponentLocation();
+	}
+
+	return Super::GetPawnViewLocation();
+}
