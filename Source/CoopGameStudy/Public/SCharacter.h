@@ -3,12 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "SWeapon.h"
 #include "GameFramework/Character.h"
 #include "SCharacter.generated.h"
 
 class UCameraComponent;
 class USpringArmComponent;
+class ASWeapon;
+class USHealthComponent;
 
 UCLASS()
 class COOPGAMESTUDY_API ASCharacter : public ACharacter
@@ -57,6 +58,10 @@ protected:
 	FName WeaponAttachSocketName;
 
 	void Fire();
+
+	void StartFire();
+
+	void StopFire();
 
 public:
 	// Called every frame
