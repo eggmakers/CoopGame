@@ -25,6 +25,9 @@ ASExplosiveBarrel::ASExplosiveBarrel()
 	RadialForceComp->bIgnoreOwningActor = true;
 
 	ExplosionImpulse = 400;
+
+	// SetReplicates(true);
+	// SetReplicateMovement(true);
 }
 
 void ASExplosiveBarrel::OnHealthChanged(USHealthComponent* OwningHealthComp, float Health, float HealthDelta,
@@ -38,6 +41,7 @@ void ASExplosiveBarrel::OnHealthChanged(USHealthComponent* OwningHealthComp, flo
 	if (Health <= 0.f)
 	{
 		bExploded = true;
+		// OnRep_Exploded();
 
 		FVector BoostIntensity = FVector::UpVector * ExplosionImpulse;
 		MeshComp->AddImpulse(BoostIntensity, NAME_None, true);
@@ -49,3 +53,11 @@ void ASExplosiveBarrel::OnHealthChanged(USHealthComponent* OwningHealthComp, flo
 		RadialForceComp->FireImpulse();
 	}
 }
+
+
+// void ASExplosiveBarrel::OnRep_Exploded()
+// {
+// 	UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, GetActorLocation());
+//
+// 	MeshComp->SetMaterial(0, ExplodedMaterial);
+// }

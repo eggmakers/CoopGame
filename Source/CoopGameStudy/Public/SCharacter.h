@@ -51,6 +51,7 @@ protected:
 	void BeginZoom();
 	void EndZoom();
 
+	UPROPERTY(Replicated)
 	ASWeapon* CurrentWeapon;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Player")
@@ -70,7 +71,7 @@ protected:
 											 Health, float HealthDelta, const class UDamageType* DamageType,
 											 class AController* InstigatedBy, AActor* DamageCauser);
 
-	UPROPERTY(BlueprintReadOnly, Category = "Players")
+	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Players")
 	bool bDied;
 
 public:
